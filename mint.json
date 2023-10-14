@@ -65,5 +65,12 @@
     "twitter": "https://twitter.com/NekoSauceBot",
     "github": "https://github.com/nekosauce-dev",
     "reddit": "https://reddit.com/u/NekoSauceBot"
+  },
+  "api": {
+    "baseUrl": "https://nekosauce.org/api",
+    "auth": {
+      "method": "key",
+      "inputPrefix": "ApiKey"
+    }
   }
 }
