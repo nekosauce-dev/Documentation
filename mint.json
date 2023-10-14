@@ -5,7 +5,7 @@
     "dark": "/logo/dark.svg",
     "light": "/logo/light.svg"
   },
-  "favicon": "/favicon.png",
+  "favicon": "https://nekosauce.org/favicon.ico",
   "colors": {
     "primary": "#9563FF",
     "light": "#AE87FF",
@@ -83,7 +83,7 @@
   ],
   "footerSocials": {
     "twitter": "https://twitter.com/NekoSauceBot",
-    "github": "https://github.com/nekosauce.dev",
+    "github": "https://github.com/nekosauce-dev",
     "reddit": "https://reddit.com/u/NekoSauceBot"
   }
 }
