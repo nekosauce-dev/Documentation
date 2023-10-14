@@ -6,7 +6,7 @@ description: "This endpoint returns all available sources."
 
 ### Response
 
-<ResponseField name="data" type="array[object]">
+<ResponseField name="data" type="object[]">
   Contains all the results.
 
   <Expandable title="data">
@@ -49,7 +49,7 @@ description: "This endpoint returns all available sources."
         </ResponseField>
       </Expandable>
     </ResponseField>
-    <ResponseField name="sauce_types" type="array">
+    <ResponseField name="sauce_types" type="number[]">
       The sauce types this source can have.
     </ResponseField>
     <ResponseField name="update_frequency" type="string">
