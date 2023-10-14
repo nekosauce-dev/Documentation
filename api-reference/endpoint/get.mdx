@@ -1,84 +1,49 @@
 ---
-title: "Get User"
-api: "GET https://api.mintlify.com/api/user"
-description: "This endpoint gets or creates a new user."
+title: "Get Sources"
+api: "GET https://nekosauce.org/api/sources"
+description: "This endpoint returns all available sources."
 ---
-
-### Body
-
-<ParamField body="name" type="string">
-  This is the name of the user group.
-</ParamField>
-
-<ParamField body="user_group_id" type="string">
-  This is the ID you use to identify this user group in your database.
-</ParamField>
-
-<ParamField body="mapping" type="object">
-  This is a JSON mapping of schema id to either the data source that this user group should be
-  associated with or id of the datasource you provided when creating it.
-</ParamField>
-
-<ParamField body="properties" type="object">
-  This is a JSON object for properties assigned to this user group. These will be accessible through
-  variables in the dashboards and SQL editor
-</ParamField>
 
 ### Response
 
-<ResponseField name="success" type="number">
-  Indicates whether the call was successful. 1 if successful, 0 if not.
+<ResponseField name="data" type="array[object]">
+  Contains all the results.
+
+  <Expandable title="data">
+    <ResponseField name="id" type="number">
+      The source's ID.
+    </ResponseField>
+    <ResponseField name="module" type="string">
+      The internal import module. Not useful for API clients but it's there for internal use.
+    </ResponseField>
+    <ResponseField name="name" type="string">
+      The human-readable name of the source.
+    </ResponseField>
+    <ResponseField name="urls" type="object">
+      The source's URLs.
+
+      <Expandable title="urls">
+        <ResponseField name="website" type="string">
+          The source's official website URL.
+        </ResponseField>
+        <ResponseField name="documentation" type="string">
+          The source's official API documentation.
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+    <ResponseField name="enabled" type="boolean">
+      Whether the source is enabled or not. If `false`, the source won't be updated with new sauces.
+    </ResponseField>
+  </Expandable>
 </ResponseField>
 
-<ResponseField name="new_user_group" type="boolean">
-  Indicates whether a new user group was created.
-</ResponseField>
-
-<ResponseField name="user_group" type="object">
-
-The contents of the user group
-
-<Expandable title="Toggle object">
-
-<ResponseField name="team_id" type="number">
-  This is the internal ID for this user group. You don't need to record this information, since
-  you will not need to use it.
-</ResponseField>
-
-<ResponseField name="token" type="string">
-  This is the user group token (userGroupToken or USER_GROUP_TOKEN) that will be used to identify
-  which user group is viewing the dashboard. You should save this on your end to use when rendering
-  an embedded dashboard.
-</ResponseField>
-
-<ResponseField name="name" type="string">
-  This is the name of the user group provided in the request body.
-</ResponseField>
-
-<ResponseField name="provided_id" type="string">
-  This is the user_group_id provided in the request body.
-</ResponseField>
-
-<ResponseField name="properties" type="JSON or null">
-  This is the properties object if it was provided in the request body
-</ResponseField>
-
-</Expandable>
-
-</ResponseField>
 
 <RequestExample>
 
 ```bash Example Request
 curl --location --request GET 'https://api.mintlify.com/api/user' \
 --header 'Content-Type: application/json' \
---header 'Authorization: Token <token>' \
---data-raw '{
-    "user_group_id": "example_1",
-    "name": "Example 1",
-    "mapping": {"40": "213", "134": "386"},
-    "properties": {"filterValue": "value"}
-}'
+--header 'Authorization: ApiKey <api-key>'
 ```
 
 </RequestExample>
@@ -87,14 +52,28 @@ curl --location --request GET 'https://api.mintlify.com/api/user' \
 
 ```json Response
 {
-  "success": 1,
-  "new_user_group": true,
-  "user_group": {
-    "team_id": 3,
-    "token": "<user_group_token_to_auth_dashboard>",
-    "name": "Example 1",
-    "provided_id": "example_1"
-  }
+  "data": [
+    {
+      "id": 1,
+      "module": "nekosauce.sauces.sources.danbooru",
+      "name": "Danbooru",
+      "urls": {
+        "website": "https://danbooru.donmai.us/",
+        "documentation": "https://danbooru.donmai.us/wiki_pages/help:api"
+      },
+      "enabled": true,
+      "components": {
+        "fetcher": "DanbooruFetcher",
+        "downloader": "DanbooruDownloader",
+        "tagger": "DanbooruTagger"
+      },
+      "sauce_types": [
+        1,
+        2
+      ],
+      "update_frequency": "default"
+    },
+  ]
 }
 ```
 
