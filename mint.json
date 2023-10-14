@@ -31,12 +31,12 @@
   "tabs": [],
   "anchors": [
     {
-      "name": "Documentation",
+      "name": "GitHub",
       "icon": "github",
-      "url": "https://docs.nekosauce.org/"
+      "url": "https://github.com/nekosauce-dev"
     },
     {
-      "name": "Discord Server",
+      "name": "Discord",
       "icon": "discord",
       "url": "https://discord.gg/GnkuWJj4JX"
     }
