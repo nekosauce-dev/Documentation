@@ -34,6 +34,27 @@ description: "This endpoint returns all available sources."
     <ResponseField name="enabled" type="boolean">
       Whether the source is enabled or not. If `false`, the source won't be updated with new sauces.
     </ResponseField>
+    <ResponseField name="components" type="object">
+      The internal components, located at `module`. They're generally useless for API clients.
+
+      <Expandable name="components">
+        <ResponseField name="fetcher" type="string">
+          The class name of the source's fetcher. Instances of this class are the ones that fetch new sauces and add them to the database. If it's `null`, this source doesn't fetch sauces.
+        </ResponseField>
+        <ResponseField name="downloader" type="string">
+          The class name of the source's downloader. Instances of this class are the ones that download the images from the source. If it's `null`, this source doesn't download images.
+        </ResponseField>
+        <ResponseField name="tagger" type="string">
+          The class name of the source's tagger. Instances of this class are the ones that convert sauce URLs into tags like `danbooru:post:id:1`.
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+    <ResponseField name="sauce_types" type="array">
+      The sauce types this source can have.
+    </ResponseField>
+    <ResponseField name="update_frequency" type="string">
+      The frequency with which new sauces are fetched from the source.
+    </ResponseField>
   </Expandable>
 </ResponseField>
 

@@ -2,20 +2,20 @@
   "$schema": "https://mintlify.com/schema.json",
   "name": "NekoSauce",
   "logo": {
-    "dark": "/logo/dark.svg",
-    "light": "/logo/light.svg"
+    "dark": "/logo.png",
+    "light": "/logo.png"
   },
-  "favicon": "https://nekosauce.org/favicon.ico",
+  "favicon": "/logo.png",
   "colors": {
-    "primary": "#9563FF",
-    "light": "#AE87FF",
-    "dark": "#0D001D",
+    "primary": "#f43f5e",
+    "light": "#f43f5e",
+    "dark": "#f43f5e",
     "background": {
       "dark": "#090014"
     },
     "anchors": {
-      "from": "#FF7F57",
-      "to": "#9563FF"
+      "from": "#a755f7",
+      "to": "#f43f5e"
     }
   },
   "topbarLinks": [
@@ -28,12 +28,7 @@
     "name": "Sign Up",
     "url": "https://nekosauce.org/sign-up"
   },
-  "tabs": [
-    {
-      "name": "API Reference",
-      "url": "api-reference"
-    }
-  ],
+  "tabs": [],
   "anchors": [
     {
       "name": "Documentation",
@@ -50,19 +45,7 @@
     {
       "group": "Get Started",
       "pages": [
-        "introduction",
-        "quickstart",
-        "development"
-      ]
-    },
-    {
-      "group": "Essentials",
-      "pages": [
-        "essentials/markdown",
-        "essentials/code",
-        "essentials/images",
-        "essentials/settings",
-        "essentials/navigation"
+        "introduction"
       ]
     },
     {
@@ -74,10 +57,7 @@
     {
       "group": "Endpoint Examples",
       "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/update",
-        "api-reference/endpoint/delete"
+        "api-reference/endpoint/get"
       ]
     }
   ],
