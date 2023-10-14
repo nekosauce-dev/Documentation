@@ -39,6 +39,11 @@
       "name": "Documentation",
       "icon": "github",
       "url": "https://docs.nekosauce.org/"
+    },
+    {
+      "name": "Discord Server",
+      "icon": "discord",
+      "url": "https://discord.gg/GnkuWJj4JX"
     }
   ],
   "navigation": [
