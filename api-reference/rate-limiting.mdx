@@ -1,0 +1,56 @@
+---
+title: "Rate Limiting"
+description: "Learn how does NekoSauce's API apply rate limits."
+---
+
+NekoSauce has to rate limit the use of it's API to avoid abuse. Currently, our server resources are not enough to handle the amount of requests that we get so the limit can be quite restrictive for some applications.
+
+The global rate limit is of 1 request per second. There is no going faster than that. However, the `/search` endpoint has a much higher limt, which is a request every 10 seconds. This limit is lowered for donators since they help us cover the server costs, and therefore they deserve more server resources dedicated to them.
+
+## Headers
+
+The API will return the following headers in **all responses**:
+
+<ResponseField name="X-RateLimit-Limit" type="number">
+    Your allowed amount of requests per time window.
+</ResponseField>
+
+<ResponseField name="X-RateLimit-Remaining" type="number">
+    The amount of requests remaining in the current time window.
+</ResponseField>
+
+<ResponseField name="X-RateLimit-Reset-After" type="number">
+    The number of seconds until the current time window resets.
+</ResponseField>
+
+<ResponseField name="X-RateLimit-Window" type="number">
+    The duration in seconds of the current time window.
+</ResponseField>
+
+<ResponseField name="X-RateLimit-Category" type="string">
+    The category of the rate limit. Different categories have different limits.
+</ResponseField>
+
+<ResponseField name="X-RateLimit-Global" type="boolean">
+    Whether the rate limit is global or not. If it's global, the block (once you get rate limited) is applied to all endpoints.
+</ResponseField>
+
+## Blocking
+
+If you got rate limited, you'll receive a `429 Too Many Requests` response:
+
+```json
+{
+  "errors": [
+    {
+      "status": "too_many_requests",
+      "message": "Wait nyan, I cannot go that fast >.<! Don't speed up like that again or you'll end up getting blocked for longer than usual.",
+      "code": 429,
+    },
+  ]
+}
+```
+
+<Note>
+    Psst! Donators have a special rate limit (^///^)
+</Note>

@@ -1,5 +1,6 @@
 {
   "$schema": "https://mintlify.com/schema.json",
+  "openapi": "/openapi.yaml",
   "name": "NekoSauce",
   "logo": {
     "dark": "/logo.png",
@@ -51,20 +52,21 @@
     {
       "group": "API Documentation",
       "pages": [
-        "api-reference/authentication"
+        "api-reference/authentication",
+        "api-reference/rate-limiting"
       ]
     },
     {
-      "group": "Endpoint Examples",
+      "group": "Endpoints",
       "pages": [
-        "api-reference/endpoint/get"
+        "api-reference/endpoints/search",
+        "api-reference/endpoints/sources"
       ]
     }
   ],
   "footerSocials": {
     "twitter": "https://twitter.com/NekoSauceBot",
-    "github": "https://github.com/nekosauce-dev",
-    "reddit": "https://reddit.com/u/NekoSauceBot"
+    "github": "https://github.com/nekosauce-dev"
   },
   "api": {
     "baseUrl": "https://nekosauce.org/api",
