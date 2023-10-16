@@ -66,7 +66,9 @@
   ],
   "footerSocials": {
     "twitter": "https://twitter.com/NekoSauceBot",
-    "github": "https://github.com/nekosauce-dev"
+    "github": "https://github.com/nekosauce-dev",
+    "website": "https://nekosauce.org",
+    "discord": "https://discord.gg/GnkuWJj4JX"
   },
   "api": {
     "baseUrl": "https://nekosauce.org/api",

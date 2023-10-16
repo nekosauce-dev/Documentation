@@ -9,6 +9,16 @@ servers:
 paths:
   /search:
     get:
+      security:
+        - ApiKey: []
+      requestBody:
+        required: false
+        description: A raw image file. The size must not exceed 1MB. Any format supported by [Pillow](https://pillow.readthedocs.io/en/stable/handbook/image-file-formats.html) is supported.
+        content:
+          image/*:
+            schema:
+              type: string
+              format: binary
       responses:
         200:
           description: The query was completed successfully
@@ -57,6 +67,32 @@ paths:
         schema:
           type: boolean
         required: false
+      - in: header
+        name: Content-Disposition
+        description: "The name of the image file together with some other metadata. Format: `attachment; filename={filename}`"
+        schema:
+          type: string
+        required: false
+      - in: header
+        name: Content-Type
+        description: "The type of the image file (if uploaded)"
+        schema:
+          type: string
+        required: false
+  /sources:
+    get:
+      responses:
+        200:
+          description: The query was completed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Source"
 components:
   securitySchemes:
     ApiKey:
@@ -152,5 +188,57 @@ components:
           type: string
           format: date-time
           description: The date and time in which the sauce was added to NekoSauce's database
-security:
-  - ApiKey: []
+    Source:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: The source's ID
+        module:
+          type: string
+          description: The internal import module. Not useful for API clients but it's there for internal use.
+        name:
+          type: string
+          description: The human-readable name of the source.
+        urls:
+          type: object
+          description: The source's URLs
+          properties:
+            website:
+              type: string
+              format: uri
+              description: The source's official website URL
+            documentation:
+              type: string
+              format: uri
+              description: The source's official API documentation URL
+              nullable: true
+        enabled:
+          type: boolean
+          description: Whether the source is enabled or not. If `false`, the source won't be updated with new sauces.
+        components:
+          type: object
+          description: The internal components, located at `module`. They're generally useless for API clients.
+          properties:
+            fetcher:
+              type: string
+              description: The class name of the source's fetcher. Instances of this class are the ones that fetch new sauces and add them to the database. If it's `null`, this source doesn't fetch sauces.
+              nullable: true
+            downloader:
+              type: string
+              description: The class name of the source's downloader. Instances of this class are the ones that download the images from the source. If it's `null`, this source doesn't download images.
+              nullable: true
+            tagger:
+              type: string
+              description: The class name of the source's tagger. Instances of this class are the ones that convert sauce URLs into tags like `danbooru:post:id:1`.
+              nullable: true
+        sauce_types:
+          type: array
+          description: The sauce types this source can have.
+          items:
+            type: number
+            format: int32
+        update_frequency:
+          type: string
+          description: The frequency with which new sauces are fetched from the source.

@@ -11,7 +11,7 @@ The global rate limit is of 1 request per second. There is no going faster than 
 
 The API will return the following headers in **all responses**:
 
-<ResponseField name="X-RateLimit-Limit" type="number">
+<ResponseField name="X-RateLimit-Limit" type="number" default="1">
     Your allowed amount of requests per time window.
 </ResponseField>
 
