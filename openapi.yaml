@@ -31,6 +31,39 @@ paths:
                     type: array
                     items:
                       $ref: "#/components/schemas/SearchResult"
+        400:
+          description: The provided image is invalid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/InvalidImageError"
+        403:
+          description: The credentials are not provided
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/CredentialsNotProvidedError"
+        500:
+          description: An internal error occurred
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/InternalServerError"
     parameters:
       - in: query
         name: url
@@ -44,13 +77,19 @@ paths:
         schema:
           type: integer
           format: int32
+          default: 10
+          minimum: 1
+          maximum: 50
         required: false
       - in: query
         name: threshold
-        description: The lowest similarity (percentage) that can be returned
+        description: The lowest similarity (percentage) that can be returned. The lower this value, the more the time the request will take to complete.
         schema:
           type: number
           format: float
+          minimum: 1
+          maximum: 100
+          default: 90
         required: false
       - in: query
         name: sources
@@ -63,9 +102,11 @@ paths:
         required: false
       - in: query
         name: nsfw
-        description: Filter the results by their NSFW status. Don't specify to return all results
+        description: Filter the results by their NSFW status. Don't specify to return all results.
         schema:
           type: boolean
+          nullable: true
+          default: null
         required: false
       - in: header
         name: Content-Disposition
@@ -242,3 +283,71 @@ components:
         update_frequency:
           type: string
           description: The frequency with which new sauces are fetched from the source.
+    InvalidImageError:
+      type: object
+      description: The provided image is invalid.
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: The error code
+          example: 400
+        message:
+          type: string
+          description: The error message
+          example: This doesn't seem to be an image! U sure u've checked correctly? Nya!
+        status:
+          type: string
+          description: The status of the error
+          example: invalid_image
+    DownloadError:
+      type: object
+      description: An error occurred while downloading an image.
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: The error code
+          example: 400
+        message:
+          type: string
+          description: The error message
+          example: Oops! Something went wrong while downloading the file.
+        status:
+          type: string
+          description: The status of the error
+          example: download_error
+    InternalServerError:
+      type: object
+      description: An internal server error occurred.
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: The error code
+          example: 500
+        message:
+          type: string
+          description: The error message
+          example: Looks like the sauce searching catgirl broke something :/ Try again later, nyan!
+        status:
+          type: string
+          description: The status of the error
+          example: internal_server_error
+    CredentialsNotProvidedError:
+      type: object
+      description: The credentials are not provided.
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: The error code
+          example: 403
+        message:
+          type: string
+          description: The error message
+          example: Authentication credentials were not provided.
+        status:
+          type: string
+          description: The status of the error
+          example: not_authenticated

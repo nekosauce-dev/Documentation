@@ -82,7 +82,7 @@
       "inputPrefix": "ApiKey"
     },
     "playground": {
-      "mode": "simple"
+      "mode": "show"
     },
     "maintainOrder": true,
     "request": {
