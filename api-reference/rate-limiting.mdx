@@ -1,6 +1,7 @@
 ---
 title: "Rate Limiting"
 description: "Learn how does NekoSauce's API apply rate limits."
+icon: "clock"
 ---
 
 NekoSauce has to rate limit the use of it's API to avoid abuse. Currently, our server resources are not enough to handle the amount of requests that we get so the limit can be quite restrictive for some applications.
@@ -11,7 +12,7 @@ The global rate limit is of 1 request per second. There is no going faster than 
 
 The API will return the following headers in **all responses**:
 
-<ResponseField name="X-RateLimit-Limit" type="number" default="1">
+<ResponseField name="X-RateLimit-Limit" type="number">
     Your allowed amount of requests per time window.
 </ResponseField>
 

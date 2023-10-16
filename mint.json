@@ -42,6 +42,11 @@
       "url": "https://discord.gg/GnkuWJj4JX"
     }
   ],
+  "topAnchor": {
+    "name": "Documentation",
+    "icon": "book-open",
+    "iconType": "duotone"
+  },
   "navigation": [
     {
       "group": "Get Started",
@@ -75,6 +80,20 @@
     "auth": {
       "method": "key",
       "inputPrefix": "ApiKey"
+    },
+    "playground": {
+      "mode": "simple"
+    },
+    "maintainOrder": true,
+    "request": {
+      "example": {
+        "showOptionalParams": true
+      }
     }
+  },
+  "feedback": {
+    "raiseIssue": true,
+    "suggestEdit": true,
+    "thumbsRating": true
   }
 }
